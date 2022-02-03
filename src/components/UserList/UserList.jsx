@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Grid, Paper } from '@mui/material';
 import { usersOperations, usersSelectors } from '../../redux/users';
@@ -11,6 +12,11 @@ function UserList() {
 		dispatch(usersOperations.getUsers());
 	}, []);
 
+	const navigate = useNavigate();
+	const handleAddClick = () => {
+		navigate('/add-user');
+	};
+
 	const users = useSelector(usersSelectors.getAllUsers);
 
 	return (
@@ -18,7 +24,9 @@ function UserList() {
 			<Grid container>
 				<Grid container mx={2} justifyContent="space-between" alignItems="center">
 					<h2>User List</h2>
-					<Button variant="outlined">Add New</Button>
+					<Button onClick={handleAddClick} variant="outlined">
+						Add New
+					</Button>
 				</Grid>
 				<Grid container mx={2}>
 					<UsersTable users={users} />

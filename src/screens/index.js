@@ -1,3 +1,4 @@
 import Dashboard from './Dashboard';
+import AddUser from './AddUser';
 
-export default Dashboard;
+export { Dashboard, AddUser };
