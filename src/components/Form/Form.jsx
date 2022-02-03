@@ -15,7 +15,16 @@ function Form() {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		const formData = { name, username, email, city };
+
+		if (!name.trim() || !username.trim()) return;
+		// TODO throw notification
+
+		const formData = {
+			name: name.trim(),
+			username: username.trim(),
+			email: email.trim(),
+			city: city.trim(),
+		};
 		console.log(formData);
 	};
 
@@ -26,7 +35,6 @@ function Form() {
 					marginBottom: 2,
 				}}
 				fullWidth
-				required
 				label="Name"
 				value={name}
 				onChange={(e) => setName(e.target.value)}
@@ -48,6 +56,7 @@ function Form() {
 				fullWidth
 				label="Email address"
 				value={email}
+				type="email"
 				onChange={(e) => setEmail(e.target.value)}
 			/>
 			<TextField
@@ -60,11 +69,18 @@ function Form() {
 				onChange={(e) => setCity(e.target.value)}
 			/>
 
-			<Box variant="contained" display="flex" justifyContent="space-between">
-				<Button type="button" onClick={cancelBtnHandler}>
+			<Box
+				variant="contained"
+				display="flex"
+				justifyContent="space-between"
+				sx={{
+					marginBottom: 2,
+				}}
+			>
+				<Button type="button" variant="outlined" onClick={cancelBtnHandler}>
 					Cancel
 				</Button>
-				<Button color="success" type="submit">
+				<Button color="success" type="submit" variant="contained">
 					Submit
 				</Button>
 			</Box>

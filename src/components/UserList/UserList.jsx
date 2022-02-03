@@ -24,7 +24,7 @@ function UserList() {
 			<Grid container>
 				<Grid container mx={2} justifyContent="space-between" alignItems="center">
 					<h2>User List</h2>
-					<Button onClick={handleAddClick} variant="outlined">
+					<Button onClick={handleAddClick} variant="contained" color="primary">
 						Add New
 					</Button>
 				</Grid>
