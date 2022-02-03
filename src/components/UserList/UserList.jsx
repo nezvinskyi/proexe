@@ -1,9 +1,18 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Grid, Paper } from '@mui/material';
+import { usersOperations, usersSelectors } from '../../redux/users';
 import { UsersTable } from '..';
-import data from '../../data.json';
+// import data from '../../data.json';
 
 function UserList() {
-	// console.log('data', data);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(usersOperations.getUsers());
+	}, []);
+
+	const users = useSelector(usersSelectors.getAllUsers);
+
 	return (
 		<Paper>
 			<Grid container>
@@ -12,7 +21,7 @@ function UserList() {
 					<Button variant="outlined">Add New</Button>
 				</Grid>
 				<Grid container mx={2}>
-					<UsersTable data={data} />
+					<UsersTable users={users} />
 				</Grid>
 			</Grid>
 		</Paper>

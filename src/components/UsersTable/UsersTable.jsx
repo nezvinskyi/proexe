@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 
-function UsersTable({ data }) {
+function UsersTable({ users }) {
 	return (
 		<Table>
 			<TableHead>
@@ -16,7 +16,7 @@ function UsersTable({ data }) {
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{data.map(({ id, name, username, email, address: { city } }) => (
+				{users.map(({ id, name, username, email, address: { city } }) => (
 					<TableRow key={id}>
 						<TableCell align="center">{id}</TableCell>
 						<TableCell align="center">{name}</TableCell>
