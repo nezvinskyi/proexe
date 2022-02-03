@@ -24,10 +24,14 @@ function UsersTable({ users }) {
 						<TableCell align="center">{email}</TableCell>
 						<TableCell align="center">{city}</TableCell>
 						<TableCell align="center">
-							<Button>edit</Button>
+							<Button variant="contained" color="warning">
+								edit
+							</Button>
 						</TableCell>
 						<TableCell align="center">
-							<Button>delete</Button>
+							<Button variant="contained" color="error">
+								delete
+							</Button>
 						</TableCell>
 					</TableRow>
 				))}
