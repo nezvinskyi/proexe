@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Grid, Paper } from '@mui/material';
 import { usersOperations, usersSelectors } from '../../redux/users';
 import { UsersTable, Modal } from '..';
-// import data from '../../data.json';
 
 function UserList() {
 	const navigate = useNavigate();

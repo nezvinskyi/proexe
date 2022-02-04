@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import api from '../../service/users-api';
 import * as actions from './users-actions';
 

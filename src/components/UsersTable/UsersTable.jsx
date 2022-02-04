@@ -16,29 +16,35 @@ function UsersTable({ users, handleEditClick, handleDeleteClick }) {
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{users.map(({ id, name, username, email, address: { city } }) => (
-					<TableRow key={id}>
-						<TableCell align="center">{id}</TableCell>
-						<TableCell align="center">{name}</TableCell>
-						<TableCell align="center">{username}</TableCell>
-						<TableCell align="center">{email}</TableCell>
-						<TableCell align="center">{city}</TableCell>
-						<TableCell align="center">
-							<Button variant="contained" color="warning" onClick={() => handleEditClick(id)}>
-								edit
-							</Button>
-						</TableCell>
-						<TableCell align="center">
-							<Button
-								variant="contained"
-								color="error"
-								onClick={() => handleDeleteClick(id, username)}
-							>
-								delete
-							</Button>
-						</TableCell>
+				{users.length === 0 ? (
+					<TableRow>
+						<p style={{ textAlign: 'center', color: 'red' }}>There are no users...</p>
 					</TableRow>
-				))}
+				) : (
+					users.map(({ id, name, username, email, address: { city } }) => (
+						<TableRow key={id}>
+							<TableCell align="center">{id}</TableCell>
+							<TableCell align="center">{name}</TableCell>
+							<TableCell align="center">{username}</TableCell>
+							<TableCell align="center">{email}</TableCell>
+							<TableCell align="center">{city}</TableCell>
+							<TableCell align="center">
+								<Button variant="contained" color="warning" onClick={() => handleEditClick(id)}>
+									edit
+								</Button>
+							</TableCell>
+							<TableCell align="center">
+								<Button
+									variant="contained"
+									color="error"
+									onClick={() => handleDeleteClick(id, username)}
+								>
+									delete
+								</Button>
+							</TableCell>
+						</TableRow>
+					))
+				)}
 			</TableBody>
 		</Table>
 	);
