@@ -1,7 +1,20 @@
 /* eslint-disable react/prop-types */
 import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { usersOperations } from '../../redux/users';
 
 function UsersTable({ users }) {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const handleEditClick = (id) => {
+		navigate(`/edit-user/${id}`);
+	};
+
+	const handleDeleteClick = (id) => {
+		dispatch(usersOperations.deleteUser(id));
+	};
+
 	return (
 		<Table>
 			<TableHead>
@@ -24,12 +37,12 @@ function UsersTable({ users }) {
 						<TableCell align="center">{email}</TableCell>
 						<TableCell align="center">{city}</TableCell>
 						<TableCell align="center">
-							<Button variant="contained" color="warning">
+							<Button variant="contained" color="warning" onClick={() => handleEditClick(id)}>
 								edit
 							</Button>
 						</TableCell>
 						<TableCell align="center">
-							<Button variant="contained" color="error">
+							<Button variant="contained" color="error" onClick={() => handleDeleteClick(id)}>
 								delete
 							</Button>
 						</TableCell>
