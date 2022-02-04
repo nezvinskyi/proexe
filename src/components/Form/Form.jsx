@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { TextField, Box, Button } from '@mui/material';
 
 function Form({ formdata }) {
@@ -64,5 +64,17 @@ function Form({ formdata }) {
 		</form>
 	);
 }
+
+Form.propTypes = {
+	formdata: PropTypes.shape({
+		name: PropTypes.string,
+		username: PropTypes.string,
+		email: PropTypes.string,
+		city: PropTypes.string,
+		submitHandler: PropTypes.func,
+		onChangeHandler: PropTypes.func,
+		cancelBtnHandler: PropTypes.func,
+	}).isRequired,
+};
 
 export default Form;

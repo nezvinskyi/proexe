@@ -46,7 +46,7 @@ function EditUser() {
 		e.preventDefault();
 
 		if (!name.trim() || !username.trim()) return;
-		// TODO throw notification
+		// TODO show notification
 
 		const formData = {
 			name: name.trim(),
