@@ -1,32 +1,9 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+/* eslint-disable react/prop-types */
 import { TextField, Box, Button } from '@mui/material';
 
-function Form() {
-	const navigate = useNavigate();
-	const [name, setName] = useState('');
-	const [username, setUsername] = useState('');
-	const [email, setEmail] = useState('');
-	const [city, setCity] = useState('');
-
-	const cancelBtnHandler = () => {
-		navigate('/');
-	};
-
-	const submitHandler = (e) => {
-		e.preventDefault();
-
-		if (!name.trim() || !username.trim()) return;
-		// TODO throw notification
-
-		const formData = {
-			name: name.trim(),
-			username: username.trim(),
-			email: email.trim(),
-			city: city.trim(),
-		};
-		console.log(formData);
-	};
+function Form({ formdata }) {
+	const { name, username, email, city, submitHandler, onChangeHandler, cancelBtnHandler } =
+		formdata;
 
 	return (
 		<form onSubmit={submitHandler}>
@@ -35,9 +12,10 @@ function Form() {
 					marginBottom: 2,
 				}}
 				fullWidth
+				required
 				label="Name"
 				value={name}
-				onChange={(e) => setName(e.target.value)}
+				onChange={(e) => onChangeHandler('name', e.target.value)}
 			/>
 			<TextField
 				sx={{
@@ -47,7 +25,7 @@ function Form() {
 				required
 				label="Username"
 				value={username}
-				onChange={(e) => setUsername(e.target.value)}
+				onChange={(e) => onChangeHandler('username', e.target.value)}
 			/>
 			<TextField
 				sx={{
@@ -57,7 +35,7 @@ function Form() {
 				label="Email address"
 				value={email}
 				type="email"
-				onChange={(e) => setEmail(e.target.value)}
+				onChange={(e) => onChangeHandler('email', e.target.value)}
 			/>
 			<TextField
 				sx={{
@@ -66,7 +44,7 @@ function Form() {
 				fullWidth
 				label="City"
 				value={city}
-				onChange={(e) => setCity(e.target.value)}
+				onChange={(e) => onChangeHandler('city', e.target.value)}
 			/>
 
 			<Box

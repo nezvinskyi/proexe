@@ -6,4 +6,18 @@ const getUsers = async () => {
 	return data;
 };
 
-export default { getUsers };
+const addUser = async (user) => {
+	const { data } = await axios.post('/data', user);
+	return data;
+};
+
+const editUser = async (id, payload) => {
+	const { data } = await axios.patch(`/data/${id}`, payload);
+	return data;
+};
+
+const deleteUser = async (id) => {
+	await axios.delete(`/data/${id}`);
+};
+
+export default { getUsers, addUser, editUser, deleteUser };

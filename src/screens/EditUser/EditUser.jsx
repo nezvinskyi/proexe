@@ -1,17 +1,22 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Grid, Paper } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { DashboardLayout, Form } from '../../components';
-import { usersOperations } from '../../redux/users';
+import { usersOperations, usersSelectors } from '../../redux/users';
 
-function AddUser() {
+function EditUser() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [name, setName] = useState('');
-	const [username, setUsername] = useState('');
-	const [email, setEmail] = useState('');
-	const [city, setCity] = useState('');
+
+	const { id } = useParams();
+	const users = useSelector(usersSelectors.getAllUsers);
+	const userToEdit = users.find((item) => item.id === +id);
+
+	const [name, setName] = useState(userToEdit?.name);
+	const [username, setUsername] = useState(userToEdit?.username);
+	const [email, setEmail] = useState(userToEdit?.email);
+	const [city, setCity] = useState(userToEdit?.address.city);
 
 	const onChangeHandler = (fieldName, value) => {
 		switch (fieldName) {
@@ -50,7 +55,7 @@ function AddUser() {
 			address: { city: city.trim() },
 		};
 
-		dispatch(usersOperations.addUser(formData));
+		dispatch(usersOperations.editUser(id, formData));
 
 		cancelBtnHandler();
 	};
@@ -70,7 +75,7 @@ function AddUser() {
 			<Paper>
 				<Grid container>
 					<Grid container mx={2} justifyContent="space-between" alignItems="center">
-						<h2>Add new user</h2>
+						<h2>Edit user</h2>
 					</Grid>
 					<Grid container mx={2}>
 						<Form formdata={formdata} />
@@ -81,4 +86,4 @@ function AddUser() {
 	);
 }
 
-export default AddUser;
+export default EditUser;
