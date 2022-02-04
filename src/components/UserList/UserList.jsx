@@ -1,23 +1,40 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Grid, Paper } from '@mui/material';
 import { usersOperations, usersSelectors } from '../../redux/users';
-import { UsersTable } from '..';
+import { UsersTable, Modal } from '..';
 // import data from '../../data.json';
 
 function UserList() {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const [modalIsOpen, setModalOpen] = useState(false);
+	const [user, setUser] = useState('');
+
 	useEffect(() => {
 		dispatch(usersOperations.getUsers());
 	}, []);
 
-	const navigate = useNavigate();
 	const handleAddClick = () => {
 		navigate('/add-user');
 	};
 
 	const users = useSelector(usersSelectors.getAllUsers);
+
+	const handleEditClick = (id) => {
+		navigate(`/edit-user/${id}`);
+	};
+
+	const handleDeleteClick = (id, username) => {
+		setModalOpen(true);
+
+		setUser({ id, username });
+	};
+
+	const handleClose = () => {
+		setModalOpen(false);
+	};
 
 	return (
 		<Paper>
@@ -29,9 +46,14 @@ function UserList() {
 					</Button>
 				</Grid>
 				<Grid container mx={2}>
-					<UsersTable users={users} />
+					<UsersTable
+						users={users}
+						handleDeleteClick={handleDeleteClick}
+						handleEditClick={handleEditClick}
+					/>
 				</Grid>
 			</Grid>
+			<Modal modalIsOpen={modalIsOpen} handleClose={handleClose} user={user} />
 		</Paper>
 	);
 }
