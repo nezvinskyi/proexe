@@ -48,7 +48,6 @@ function Form({ formdata }) {
 			/>
 
 			<Box
-				variant="contained"
 				display="flex"
 				justifyContent="space-between"
 				sx={{
